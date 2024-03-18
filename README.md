@@ -4,7 +4,7 @@ This competition involves submitting a machine learning algorithm that can play 
 
 ## Submission Format
 
-The event will be held **online**, and the code for your models have to submitted online. Your agent will have to extend a base agent class and implement the methods of that class. The code for the base class is given below. For the specific details about the structure of the state and what return type is expected look at the section in the bottom of the document.
+The event will be held **online**, and the code for your models have to submitted online. Your agent will have to extend a base agent class (BasePokerPlayer) and implement the methods of that class. The code for the base class is given below. For the specific details about the structure of the state and what return type is expected look at the section in the bottom of the document.
 
 ```python
 #Look below for the strcuture of the various variables passed
@@ -34,10 +34,12 @@ class BasePokerPlayer:
 
 
 ## Submission Conditions
+**Submit a single python file** containing your model as a class called **CustomPokerPlayer** extending BasePokerPlayer. It must implement all the methods defined in BasePokerPlayer. If your model requires weights, they must be attached in a separate file and loaded into the model as part of receive_game_start_message.
 
 - The models must be written in pytorch
 - The models have to perform without being given user input
 - The models will not have internet access
+- Do not include any training or debug code, only the class definition as shown in the examples
 
 ## Samples of callback arguments
 
