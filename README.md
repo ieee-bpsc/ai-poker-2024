@@ -1,10 +1,12 @@
 # Silicon Chip Smackdown
 
+![Silicon Chip Smackdown Logo](logo.png)
+
 This competition involves submitting a machine learning algorithm that can play a game of Texas hold'em poker against other agents. The performance of the models will also be tested against various given and hidden baseline models. The various conditions of the game will be provided to the participants.
 
 ## Submission Format
 
-The event will be held **online**, and the code for your models have to submitted online. Your agent will have to extend a base agent class (BasePokerPlayer) and implement the methods of that class. The code for the base class is given below. For the specific details about the structure of the state and what return type is expected look at the section in the bottom of the document.
+The first round of the event will be held **online**, and the code for your models have to submitted online. Your agent will have to extend a base agent class (BasePokerPlayer) and implement the methods of that class. The code for the base class is given below. For the specific details about the structure of the state and what return type is expected look at the section in the bottom of the document.
 
 ```python
 #Look below for the strcuture of the various variables passed
@@ -32,14 +34,27 @@ class BasePokerPlayer:
         pass
 ```
 
+## Setup
+
+First, clone this repository. Then install the required packages in a new virtual environment by running the following lines -
+
+```zsh
+python -m venv env
+source env/bin/activate
+pip install -r requirements.txt
+```
+
+Make sure you are using **Python 3.12**. if you are using Windows, pywin32 might be an additional dependency as mentioned in the [requirements.txt](requirements.txt) file.
 
 ## Submission Conditions
+
 **Submit a single python file** containing your model as a class called **CustomPokerPlayer** extending BasePokerPlayer. It must implement all the methods defined in BasePokerPlayer. If your model requires weights, they must be attached in a separate file and loaded into the model as part of receive_game_start_message.
 
 - The models must be written in pytorch
 - The models have to perform without being given user input
 - The models will not have internet access
 - Do not include any training or debug code, only the class definition as shown in the examples
+- Your model must not have any dependencies outside of those specified in the requirements.txt file. If you wish to get a package added, please contact the organisers.
 
 ## Samples of callback arguments
 
@@ -47,8 +62,7 @@ class BasePokerPlayer:
 
 - valid_actions
 
-```
-
+```python
 [
 
   {'action': 'fold', 'amount': 0},
@@ -63,7 +77,7 @@ class BasePokerPlayer:
 
 - hole_card
 
-```
+```python
 
 ['CA', 'DK']
 
@@ -71,7 +85,7 @@ class BasePokerPlayer:
 
 - round_state
 
-```
+```python
 
 {
 
@@ -153,13 +167,11 @@ class BasePokerPlayer:
 
 ```
 
-  
-
 #### `receive_game_start_message(self, game_info)`
 
 - game_info
 
-```
+```python
 
 {
 
@@ -199,13 +211,11 @@ class BasePokerPlayer:
 
 ```
 
-  
-
 #### `receive_round_start_message(self, round_count, hole_card, seats):`
 
 - round_count
 
-```
+```python
 
 2
 
@@ -213,7 +223,7 @@ class BasePokerPlayer:
 
 - hole_card
 
-```
+```python
 
 ['C2', 'HQ']
 
@@ -221,7 +231,7 @@ class BasePokerPlayer:
 
 - seats
 
-```
+```python
 
 [
 
@@ -235,13 +245,11 @@ class BasePokerPlayer:
 
 ```
 
-  
-
 #### `receive_street_start_message(self, street, round_state)`
 
 - street
 
-```
+```python
 
 'preflop'
 
@@ -249,7 +257,7 @@ class BasePokerPlayer:
 
 - round_state
 
-```
+```python
 
 {
 
@@ -303,13 +311,11 @@ class BasePokerPlayer:
 
 ```
 
-  
-
 #### `receive_game_update_message(self, new_action, round_state)`
 
 - new_action
 
-```
+```python
 
 {
 
@@ -325,7 +331,7 @@ class BasePokerPlayer:
 
 - round_state
 
-```
+```python
 
 {
 
@@ -395,13 +401,11 @@ class BasePokerPlayer:
 
 ```
 
-  
-
 #### `receive_round_result_message(self, winners, hand_info, round_state)`
 
 - winners
 
-```
+```python
 
 [
 
@@ -413,7 +417,7 @@ class BasePokerPlayer:
 
 - hand_info
 
-```
+```python
 
 [
 
@@ -465,7 +469,7 @@ class BasePokerPlayer:
 
 - round_state
 
-```
+```python
 
 {
 
